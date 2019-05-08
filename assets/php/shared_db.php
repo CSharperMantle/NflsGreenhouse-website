@@ -6,6 +6,13 @@
      * Licensed under GPL-v3 Agreement
      */
 
+    $host = getenv('DB_HOST'); // localhost
+    $port = 3306;
+    $dbname = getenv('DB_SCHEMA_NAME'); // plant_data
+    $passwd = getenv('DB_PASSWD'); // plant_client
+    $username = getenv('DB_USERNAME'); // plant_client
+    $dbdsn = "mysql:host=" . $host . ";port=" . $port . ";dbname=" . $dbname;
+
     function run_query(PDO $connection, string $sql, array $args = array()) {
         $stmt = $connection->prepare($sql);
         $stmt->execute($args);
@@ -30,8 +37,7 @@
         
         public static function getInstance() {
             if (!(DBConnectionSingleton::$_pdo_instance instanceof PDO)) {
-                $dbdsn = "mysql:host=" . getenv('DB_HOST') . ";port=" . 3306 . ";dbname=" . getenv('DB_SCHEMA_NAME');
-                DBConnectionSingleton::$_pdo_instance = new PDO($dbdsn, getenv('DB_USERNAME'), getenv('DB_PASSWD'));
+                DBConnectionSingleton::$_pdo_instance = new PDO($dbdsn, $username, $passwd);
             }
             return DBConnectionSingleton::$_pdo_instance;
         }
