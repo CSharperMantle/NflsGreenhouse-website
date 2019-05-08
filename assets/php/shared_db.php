@@ -11,7 +11,7 @@
     $dbname = getenv('DB_SCHEMA_NAME'); // plant_data
     $passwd = getenv('DB_PASSWD'); // plant_client
     $username = getenv('DB_USERNAME'); // plant_client
-    $dbdsn = "mysql:host=" . host . ";port=" . port . ";dbname=" . dbname;
+    $dbdsn = "mysql:host=" . $host . ";port=" . $port . ";dbname=" . $dbname;
 
     function run_query(PDO $connection, string $sql, array $args = array()) {
         $stmt = $connection->prepare($sql);
