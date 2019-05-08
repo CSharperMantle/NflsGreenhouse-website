@@ -6,12 +6,12 @@
      * Licensed under GPL-v3 Agreement
      */
 
-    const host = 'localhost';
-    const port = 3306;
-    const dbname = 'plant_data';
-    const passwd = 'plant_client';
-    const username = 'plant_client';
-    const dbdsn = "mysql:host=" . host . ";port=" . port . ";dbname=" . dbname;
+    $host = getenv('DB_HOST'); // localhost
+    $port = 3306;
+    $dbname = getenv('DB_SCHEMA_NAME'); // plant_data
+    $passwd = getenv('DB_PASSWD'); // plant_client
+    $username = getenv('DB_USERNAME'); // plant_client
+    $dbdsn = "mysql:host=" . host . ";port=" . port . ";dbname=" . dbname;
 
     function run_query(PDO $connection, string $sql, array $args = array()) {
         $stmt = $connection->prepare($sql);
@@ -37,15 +37,16 @@
         
         public static function getInstance() {
             if (!(DBConnectionSingleton::$_pdo_instance instanceof PDO)) {
-                DBConnectionSingleton::$_pdo_instance = new PDO(dbdsn, username, passwd);
+                DBConnectionSingleton::$_pdo_instance = new PDO($dbdsn, $username, $passwd);
             }
             return DBConnectionSingleton::$_pdo_instance;
         }
 
         private function __constructor() {
         }
+
         private function __clone() {
-            throw new RuntimeException('DBConnectionSingleton cannot be cloned');
+            throw new Exception('DBConnectionSingleton cannot be cloned');
         }
     }
 ?>
