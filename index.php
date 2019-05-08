@@ -237,7 +237,7 @@
               <div class="desc">今日上传数</div>
               <div class="value"><span class="indicator indicator-equal mdi mdi-chevron-right"></span>
                 <span data-toggle="counter" data-end="<?= $today_uploads; ?>" class="number">
-                  <?= $today_uploads; ?></span>
+                  0</span>
               </div>
             </div>
           </div>
@@ -248,7 +248,8 @@
             <div class="data-info">
               <div class="desc">今日报警数</div>
               <div class="value"><span class="indicator indicator-negative mdi mdi-chevron-right"></span>
-                <span data-toggle="counter" data-end="<?= $today_alerts; ?>" class="number">0</span>
+                <span data-toggle="counter" data-end="<?= $today_alerts; ?>" class="number">
+                  0</span>
               </div>
             </div>
           </div>
