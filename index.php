@@ -41,6 +41,8 @@
     $ground_hum = 'None';
     $total_commits = 0;
     $total_alerts = 0;
+    $today_uploads = 0;
+    $today_alerts = 0;
     $error_occur = true;
   }
 ?>
