@@ -294,26 +294,6 @@
             </div>
             <div class="card-body">
               <ul class="user-timeline user-timeline-compact" id="history-actions">
-                <li class="latest">
-                  <div class="user-timeline-date">刚刚</div>
-                  <div class="user-timeline-title">浇灌植物</div>
-                  <div class="user-timeline-description">为大棚内 <b>玫瑰花#P02</b> 浇了 1.00 吨水</div>
-                </li>
-                <li>
-                  <div class="user-timeline-date">今天 - 15:35</div>
-                  <div class="user-timeline-title">打开大棚大门</div>
-                  <div class="user-timeline-description">打开 <b>大门#D01</b> </div>
-                </li>
-                <li>
-                  <div class="user-timeline-date">昨天 - 23:41</div>
-                  <div class="user-timeline-title">打开大棚遮光罩</div>
-                  <div class="user-timeline-description">打开 <b>遮光罩#S01</b> </div>
-                </li>
-                <li>
-                  <div class="user-timeline-date">昨天 - 3:02</div>
-                  <div class="user-timeline-title">浇灌植物</div>
-                  <div class="user-timeline-description">为大棚内 <b>牵牛花#P01</b> 浇了 0.48 吨水</div>
-                </li>
               </ul>
             </div>
             <div class="be-spinner">
