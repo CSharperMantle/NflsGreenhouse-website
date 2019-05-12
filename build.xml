@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <project name="NflsGreenhouse-website">
-    
+    <description>
+        Ningbo Foreign Language School Greenhouse Project - Website Part
+        Building Script
+    </description>
+    <property name="dist" location="dist/" />
+
+    <target name="preclean">
+        <delete dir="${dist}" />
+    </target>
+
+    <target name="init" depends="preclean">
+        <tstamp />
+        <mkdir dir="${dist}" />
+    </target>
+
+    <target name="dist" depends="compile" description="generate the distribution">
+        <mkdir dir="${dist}/lib" />
+
+        <jar jarfile="${dist}/lib/MyProject-${DSTAMP}.jar" basedir="${build}" />
+    </target>
 </project>
