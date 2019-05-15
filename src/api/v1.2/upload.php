@@ -12,5 +12,4 @@
     require '..\\..\\assets\\php\\shared_const.php';
 
     $raw_content = file_get_contents('php://input');
-    var_dump(json_decode($, true));
 ?>+

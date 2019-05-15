@@ -29,20 +29,20 @@
         private static $_pdo_instance;
         
         public static function getInstance() {
-            if (!(DBConnectionSingleton::$_pdo_instance instanceof PDO)) {
+            if (!(self::$_pdo_instance instanceof PDO)) {
                 $dbdsn = "mysql:host=" . getenv('DB_HOST') . ";port=3306;dbname=" . getenv('DB_SCHEMA_NAME');
                 $username = getenv('DB_USERNAME');
                 $passwd = getenv('DB_PASSWD');
                 try {
-                    DBConnectionSingleton::$_pdo_instance = new PDO($dbdsn, $username, $passwd);
+                    self::$_pdo_instance = new PDO($dbdsn, $username, $passwd);
                 } catch (PDOException $e) {
                     error_log($e);
                 }
             }
-            return DBConnectionSingleton::$_pdo_instance;
+            return self::$_pdo_instance;
         }
 
-        private function __constructor() {
+        private function __construct() {
         }
 
         private function __clone() {
