@@ -5,6 +5,7 @@
         Building Script
     </description>
     <property name="dist" location="dist/" />
+    <property name="src" location="src/" />
 
     <target name="preclean">
         <delete dir="${dist}" />
@@ -16,8 +17,9 @@
     </target>
 
     <target name="dist" depends="compile" description="generate the distribution">
-        <mkdir dir="${dist}/lib" />
-
-        <jar jarfile="${dist}/lib/MyProject-${DSTAMP}.jar" basedir="${build}" />
+        <copy todir="${dist}">
+            <fileset dir="${src}">
+            </fileset>
+        </copy>
     </target>
 </project>
