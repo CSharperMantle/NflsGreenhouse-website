@@ -12,107 +12,6 @@
     require '..\\..\\assets\\php\\shared_const.php';
 
     $raw_content = file_get_contents('php://input');
-    $raw_content = '{
-        "version": "1.2.0",
-        "timestamp":
-        {
-            "hour": 12,
-            "minute": 44,
-            "second": 21
-        },
-        "data":
-        [
-            {
-                "data_type": 0,
-                "data_content": 124
-            },
-            {
-                "data_type": 1,
-                "data_content": 423
-            },
-            {
-                "data_type": 2,
-                "data_content": 183
-            },
-            {
-                "data_type": 3,
-                "data_content": 1020
-            }
-        ],
-        "devices":
-        [
-            {
-                "device_id": 0,
-                "device_ip": "192.168.1.100",
-                "status": 0
-            },
-            {
-                "device_id": 1,
-                "device_ip": "192.168.1.101",
-                "status": 1
-            }
-        ],
-        "state":
-        [
-            {
-                "pin_id": 22,
-                "state": 0
-            },
-            {
-                "pin_id": 23,
-                "state": 1
-            }
-            {
-                "pin_id": 23,
-                "state": 1
-            }
-            {
-                "pin_id": 23,
-                "state": 1
-            }
-            {
-                "pin_id": 23,
-                "state": 1
-            }
-            {
-                "pin_id": 23,
-                "state": 1
-            }
-            {
-                "pin_id": 23,
-                "state": 1
-            }
-            {
-                "pin_id": 23,
-                "state": 1
-            }
-            {
-                "pin_id": 23,
-                "state": 1
-            }
-            v
-            {
-                "pin_id": 23,
-                "state": 1
-            }
-            {
-                "pin_id": 23,
-                "state": 1
-            }
-            {
-                "pin_id": 23,
-                "state": 1
-            }
-            {
-                "pin_id": 23,
-                "state": 1
-            }
-            {
-                "pin_id": 23,
-                "state": 1
-            }
-        ]
-    }';
     $json_content = json_decode($raw_content, true);
     $version = $json_content['version'];
     $timestamp = $json_content['timestamp'];
@@ -159,6 +58,53 @@
     else {
         $sheet_inner_state = 0;
     }
-    $db_connect = new DBConnectionSingleton();
-    $db_connect->
+
+    $db = DBConnectionSingleton::getInstance();
+    $sql_value = array($air_temp, $air_hum, $light_value, $ground_hum);
+    run_query($db, INSERT_DATA_SQL, $sql_value);
+
+    //temp
+    if ($air_temp > airTempSwitchValveHigh) {
+        run_query($db, INSERT_ALERT_SQL, array(AlertType::AIR_TEMP, AlertType::HIGH));
+    }
+    elseif ($air_temp < airHumSwitchValveLow) {
+        run_query($db, INSERT_ALERT_SQL, array(AlertType::AIR_TEMP, AlertType::LOW));
+    }
+    else {
+      run_query($db, INSERT_ALERT_SQL, array(AlertType::AIR_TEMP, AlertType::OK));
+    }
+    //hum
+    if ($air_hum > airHumSwitchValveHigh) {
+      run_query($db, INSERT_ALERT_SQL, array(AlertType::AIR_HUM, AlertType::HIGH));
+    }
+    elseif ($air_hum < airHumSwitchValveLow) {
+      run_query($db, INSERT_ALERT_SQL, array(AlertType::AIR_HUM, AlertType::LOW));
+    }
+    else {
+      run_query($db, INSERT_ALERT_SQL, array(AlertType::AIR_HUM, AlertType::OK));
+    }
+    //light
+    if ($light_value > airLightSwitchValveHigh) {
+      run_query($db, INSERT_ALERT_SQL, array(AlertType::AIR_LIGHT, AlertType::HIGH));
+    }
+    elseif ($light_value < airLightSwitchValveLow) {
+      run_query($db, INSERT_ALERT_SQL, array(AlertType::AIR_LIGHT, AlertType::LOW));
+    }
+    else {
+      run_query($db, INSERT_ALERT_SQL, array(AlertType::AIR_LIGHT, AlertType::OK));
+    }
+    //Ground checks - hum
+    if ($ground_hum > groundHumSwitchValveHigh) {
+      run_query($db, INSERT_ALERT_SQL, array(AlertType::GROUND_HUM, AlertType::LOW));
+    }
+    elseif ($ground_hum < groundHumSwitchValveLow) {
+      run_query($db, INSERT_ALERT_SQL, array(AlertType::GROUND_HUM, AlertType::HIGH));
+    }
+    else {
+      run_query($db, INSERT_ALERT_SQL, array(AlertType::GROUND_HUM, AlertType::OK));
+    }
+
+    $sql_value = array($water_pump_state, $fan_one_state, $fan_two_state, $air_cooler_state, $side_window_state, $top_window_one_state, $top_window_two_state,$sheet_outer_state, $sheet_inner_state); 
+    run_query($db, INSERT_STATE_SQL, $sql_value);
+
 ?>

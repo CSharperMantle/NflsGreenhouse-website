@@ -33,7 +33,7 @@
   
   try {
     $db = DBConnectionSingleton::getInstance();
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
   }
   catch (PDOException $e) {
     http_response_code(500);

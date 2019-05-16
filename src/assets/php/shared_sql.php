@@ -8,7 +8,9 @@
     
     const INSERT_DATA_SQL = "CALL addData(?, ?, ?, ?);";
     const INSERT_ALERT_SQL = "CALL addAlert(?, ?);";
+    const INSERT_STATE_SQL = "CALL addState(?, ?, ?, ?, ?, ?, ? ,? ,?);";
     const FETCH_LATEST_SQL = "SELECT * FROM data WHERE data.id = (SELECT MAX(id) FROM data) LIMIT 1;";
+    const FETCH_LATEST_STATE_SQL = "SELECT * FROM state WHERE state.id = (SELECT MAX(id) FROM state) LIMIT 1;";
     const FETCH_TOTAL_COMMITS_SQL = "SELECT COUNT(id) count FROM data LIMIT 1;";
     const FETCH_TOTAL_ALERTS_SQL = "SELECT COUNT(id) count FROM alerts WHERE alerts.is_ok!=0 LIMIT 1;";
     const FETCH_LATEST_AIR_TEMP_ALERT_SQL = "SELECT id, is_ok FROM alerts WHERE alert_type=0 ORDER BY id DESC LIMIT 1;";

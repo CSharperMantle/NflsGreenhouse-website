@@ -35,6 +35,7 @@
                 $passwd = getenv('DB_PASSWD');
                 try {
                     self::$_pdo_instance = new PDO($dbdsn, $username, $passwd);
+                    self::$_pdo_instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_SILENT);
                 } catch (PDOException $e) {
                     error_log($e);
                 }
