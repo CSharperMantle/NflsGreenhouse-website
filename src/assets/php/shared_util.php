@@ -18,4 +18,5 @@
         http_response_code($code);
         exit();
     }
+    
 ?>

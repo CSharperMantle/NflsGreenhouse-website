@@ -198,7 +198,7 @@
           <div role="alert" class="alert alert-danger alert-icon">
             <div class="icon"><span class="mdi mdi-close-circle-o"></span></div>
             <div class="message">
-              <strong>错误！</strong> 您没有允许JavaScript!
+              <strong>错误！</strong> 浏览器不支持执行JavaScript!
             </div>
           </div>
         </noscript>

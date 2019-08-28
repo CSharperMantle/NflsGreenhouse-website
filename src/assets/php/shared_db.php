@@ -30,7 +30,9 @@
         
         public static function getInstance() {
             if (!(self::$_pdo_instance instanceof PDO)) {
-                $dbdsn = "mysql:host=" . getenv('DB_HOST') . ";port=3306;dbname=" . getenv('DB_SCHEMA_NAME');
+                $host = getenv('DB_HOST');
+                $schema = getenv('DB_SCHEMA_NAME');
+                $dbdsn = "mysql:host={$host};port=3306;dbname={$schema}";
                 $username = getenv('DB_USERNAME');
                 $passwd = getenv('DB_PASSWD');
                 try {

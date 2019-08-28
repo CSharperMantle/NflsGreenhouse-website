@@ -10,23 +10,6 @@
   require 'assets\\php\\shared_html.php';
   require 'assets\\php\\shared_xml.php';
   require 'assets\\php\\shared_const.php';
-
-  try {
-    $db = DBConnectionSingleton::getInstance();
-
-    $result = run_query_fetch($db, FETCH_LATEST_SQL);
-    $air_temp = $result['air_temp'];
-    $air_hum = $result['air_hum'];
-    $air_light = $result['air_light'];
-    $ground_hum = $result['ground_hum'];
-  }
-  catch (Exception $e) {
-    $air_temp = 'None';
-    $air_hum = 'None';
-    $air_light = 'None';
-    $ground_hum = 'None';
-    $error_occur = true;
-  }
 ?>
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans">
@@ -167,17 +150,13 @@
     <div class="be-content">
       <div class="main-content container-fluid">
         <noscript>
-          <?php
-            print_alert(AlertInfo::DANGER, '使用了不支持的设置！', 'JavaScript加载失败。大部分功能将不能正常工作。');
-          ?>
+          <div role="alert" class="alert alert-danger alert-icon">
+            <div class="icon"><span class="mdi mdi-close-circle-o"></span></div>
+            <div class="message">
+              <strong>错误！</strong> 浏览器不支持执行JavaScript!
+            </div>
+          </div>
         </noscript>
-      <?php
-        if (isset($error_occur)) {
-          print_alert(AlertInfo::DANGER, '错误！', '加载页面时出错。页面不会正常工作。');
-          http_response_code(503);
-          exit();
-        }
-      ?>
       <div class="row">
         <div id="air-temp-card-holder" class="col-lg-3"></div>
         <div id="air-hum-card-holder" class="col-lg-3"></div>
